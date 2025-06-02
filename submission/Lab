@@ -1,0 +1,27 @@
+Certainly! A STAR-based disaster recovery plan follows the Situation, Task, Action, Result framework to clearly outline the strategy. Here's how to approach the recovery from a Google Cloud us-central1 outage using Google Cloud services:
+Situation:
+The us-central1 region is experiencing a regional outage, affecting critical workloads hosted in Cloud SQL, Cloud Storage, and Pub/Sub messaging services. Business operations relying on this region are disrupted, requiring an immediate failover and recovery strategy.
+Task:
+Ensure high availability, minimal downtime, and data integrity by leveraging Google Cloud's multi-region capabilities. The plan must:
+Failover database operations to a secondary region.
+Redirect storage access to backup locations.
+Maintain message delivery for event-driven architectures.
+Enable automated monitoring and alerting for future resilience.
+Action:
+The following steps outline the failover and recovery process:
+1. Database Recovery – Cloud SQL Replicas
+Failover Mechanism: Ensure Cloud SQL is configured with a cross-region replica (e.g., from us-central1 to us-east1).
+When us-central1 fails, manually promote the replica or set automatic failover if using Cloud SQL HA.
+Redirect application connections to the new primary database.
+2. Storage Recovery – Multi-Region Cloud Storage
+Use multi-region Cloud Storage buckets instead of single-region storage.
+Cloud Storage automatically serves data from an alternate region (e.g., us multi-region).
+If using regional buckets, enable replication policies for backup and synchronization.
+3. Messaging & Event Processing – Pub/Sub Alerts & Replication
+Ensure Pub/Sub topics have cross-region subscriptions so messages persist despite the outage.
+Configure dead-letter queues to prevent message loss.
+Enable Cloud Monitoring and Logging alerts to detect failures in message delivery.
+4. Network & Application Failover
+Use Cloud Load Balancer to redirect traffic to a healthy region dynamically.
+If using Compute Engine, maintain standby instances in an alternate region.
+Automatically
